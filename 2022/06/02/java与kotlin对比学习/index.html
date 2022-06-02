@@ -18,26 +18,27 @@
   <meta name="author" content="Ezralin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="JVM 浅谈 Java 构造对象浅谈​ 在日常编程中，我们不假思索地使用new去新建一个对象，但 Java是如何在底层进行对象的创建？如何在底层完成对象的创建并进行初始化？下面我们来探讨以下这个问题： Animal animal&#x3D;new Animal() 上行代码是对象实例化的过程，在程序中执行这行代码，将会经历以下过程：  在方法区寻找 Animal 类的信息  判断 Java编译后的字节码里面">
+    <meta name="description" content="Java与kotlin比较分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java代码运行深层原理">
-<meta property="og:url" content="http://eminent-yaoyilin.com/2022/06/02/Java%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E6%B7%B1%E5%B1%82%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="java与kotlin对比学习">
+<meta property="og:url" content="http://eminent-yaoyilin.com/2022/06/02/java%E4%B8%8Ekotlin%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Ezralin&#39;blog">
-<meta property="og:description" content="JVM 浅谈 Java 构造对象浅谈​ 在日常编程中，我们不假思索地使用new去新建一个对象，但 Java是如何在底层进行对象的创建？如何在底层完成对象的创建并进行初始化？下面我们来探讨以下这个问题： Animal animal&#x3D;new Animal() 上行代码是对象实例化的过程，在程序中执行这行代码，将会经历以下过程：  在方法区寻找 Animal 类的信息  判断 Java编译后的字节码里面">
+<meta property="og:description" content="Java与kotlin比较分析">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://eminent-yaoyilin.com/imageSelf/paper02.jfif">
-<meta property="article:published_time" content="2022-06-02T05:20:42.000Z">
-<meta property="article:modified_time" content="2022-06-02T15:29:24.187Z">
+<meta property="og:image" content="http://eminent-yaoyilin.com/imageSelf/index_banner01.jpg">
+<meta property="article:published_time" content="2022-06-02T15:20:42.000Z">
+<meta property="article:modified_time" content="2022-06-02T15:36:53.312Z">
 <meta property="article:author" content="Ezralin">
 <meta property="article:tag" content="Java">
+<meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://eminent-yaoyilin.com/imageSelf/paper02.jfif">
+<meta name="twitter:image" content="http://eminent-yaoyilin.com/imageSelf/index_banner01.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Java代码运行深层原理 - Ezralin&#39;blog</title>
+  <title>java与kotlin对比学习 - Ezralin&#39;blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,13 +207,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/imageSelf/paperBanner.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/imageSelf/index_banner02.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Java代码运行深层原理"></span>
+            <span id="subtitle" data-typed-text="java与kotlin对比学习"></span>
           
         </div>
 
@@ -223,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-02 13:20" pubdate>
-          2022年6月2日 下午
+        <time datetime="2022-06-02 23:20" pubdate>
+          2022年6月2日 晚上
         </time>
       </span>
     
@@ -235,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          1.1k 字
         
       </span>
     
@@ -246,7 +247,7 @@
         
         
         
-          18 分钟
+          10 分钟
         
       </span>
     
@@ -284,42 +285,42 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Java代码运行深层原理</h1>
+            <h1 style="display: none">java与kotlin对比学习</h1>
             
             <div class="markdown-body">
               
-              <h1 id="JVM-浅谈"><a href="#JVM-浅谈" class="headerlink" title="JVM 浅谈"></a>JVM 浅谈</h1><ul>
-<li><h3 id="Java-构造对象浅谈"><a href="#Java-构造对象浅谈" class="headerlink" title="Java 构造对象浅谈"></a>Java 构造对象浅谈</h3><p>​ 在日常编程中，我们不假思索地使用<em>new</em>去新建一个对象，但 <em>Java</em>是如何在底层进行对象的创建？如何在底层完成对象的创建并进行初始化？下面我们来探讨以下这个问题：</p>
-<p><code><em>Animal animal=new Animal()</em></code></p>
-<p>上行代码是对象实例化的过程，在程序中执行这行代码，将会经历以下过程：</p>
-<ol>
-<li><p>在<strong>方法区</strong>寻找 Animal 类的信息</p>
-</li>
-<li><p><strong>判断</strong> <em>Java</em>编译后的字节码里面是否有这个<em>Animal</em>类，如果没有，则类加载器会将当前这个类的<strong>字节码文件</strong>加载到文件中</p>
-</li>
-<li><p><code>new Animal()</code>创建对象时，对象在<strong>堆</strong>（_heap_）里面被分配内存空间</p>
-</li>
-<li><p>该被创建的对象在<strong>堆</strong>中的<strong>地址</strong>会被压入<strong>操作数栈</strong></p>
-</li>
-<li><p>在当前<strong>线程栈</strong>的方法栈帧的<strong>局部变量区域</strong>申请内存空间给<em>animal</em></p>
-</li>
-<li><p>从操作数帧中弹出顶部操作数（就是被创建对象在<strong>堆</strong>中的<strong>地址</strong>）赋值给<em>animal</em>，从而使<em>animal</em> <strong>指向</strong>新建的<em>Animal</em>对象</p>
-</li>
-</ol>
-<hr>
-</li>
-<li><h3 id="JVM-理解"><a href="#JVM-理解" class="headerlink" title="JVM 理解"></a>JVM 理解</h3><p>我们将从下面这个简单的代码的<strong>反编译</strong>的*.class<em>文件，深度理解</em>Java*是如何在内存中被执行的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestPerson</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">doSomething</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">int</span> a= <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (a+b)*<span class="hljs-number">5</span>;<br>        <span class="hljs-keyword">return</span> c;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        TestPerson testPerson=<span class="hljs-keyword">new</span> <span class="hljs-title class_">TestPerson</span>();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> testPerson.doSomething();<br>        System.out.println(result);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h4 id="上述代码的class反编译文件"><a href="#上述代码的class反编译文件" class="headerlink" title=".上述代码的class反编译文件"></a>.上述代码的<em>class</em>反编译文件</h4><p>我们对一些可以<strong>见名知意</strong>的名词不做过多解释，不清楚的大家可以在简书中搜索，<strong>此处</strong>主要还是<strong>加深</strong>大家对代码的<strong>理解</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java">Compiled from <span class="hljs-string">&quot;JVM_03.TestPerson.java&quot;</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JVM_03</span>.TestPerson &#123;<br>  <span class="hljs-keyword">public</span> JVM_03.TestPerson();               <span class="hljs-comment">// 这是默认构造函数</span><br>    Code:<br>       <span class="hljs-number">0</span>: aload_0<br>       <span class="hljs-number">1</span>: invokespecial #<span class="hljs-number">1</span>                  <span class="hljs-comment">// Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br>       <span class="hljs-number">4</span>: <span class="hljs-keyword">return</span><br><br>  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">doSomething</span><span class="hljs-params">()</span>;<br>    Code:<br>       <span class="hljs-number">0</span>: iconst_1      <span class="hljs-comment">// 把常量1压入操作数栈</span><br>       <span class="hljs-number">1</span>: istore_1      <span class="hljs-comment">// 从操作数栈中弹出刚刚入栈的常量1</span><br>                        <span class="hljs-comment">// 并把它赋值给局部变量表中索引为1的变量</span><br>                        <span class="hljs-comment">// 即赋值给a  (对应代码：int a=1)</span><br>       <span class="hljs-number">2</span>: iconst_2<br>       <span class="hljs-number">3</span>: istore_2            <span class="hljs-comment">// 同上</span><br>       <span class="hljs-number">4</span>: iload_1             <span class="hljs-comment">// 将局部变量表中下标为1的int变量压入操作数栈</span><br>       <span class="hljs-number">5</span>: iload_2             <span class="hljs-comment">// 同上</span><br>       <span class="hljs-number">6</span>: iadd                <span class="hljs-comment">// 在操作数栈中完成两数相加</span><br>       <span class="hljs-number">7</span>: iconst_5            <span class="hljs-comment">// 将常量5压入操作数栈</span><br>       <span class="hljs-number">8</span>: imul                <span class="hljs-comment">//在操作数栈中完成乘法运算</span><br>       <span class="hljs-number">9</span>: istore_3            <span class="hljs-comment">//弹出运算结果并且赋值给局部变量表中索引为3的变量</span><br>      <span class="hljs-number">10</span>: iload_3<br>      <span class="hljs-number">11</span>: ireturn             <span class="hljs-comment">// 返回int类型的值 (ireturn 语句中 i就表示int)</span><br><br><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(java.lang.String[])</span>;<br>    Code:<br>       <span class="hljs-number">0</span>: <span class="hljs-keyword">new</span>           #<span class="hljs-number">2</span>                  <span class="hljs-comment">// class JVM_03.TestPerson</span><br>       <span class="hljs-number">3</span>: dup<br>       <span class="hljs-number">4</span>: invokespecial #<span class="hljs-number">3</span>                  <span class="hljs-comment">// Method &quot;&lt;init&gt;&quot;:()V</span><br>       <span class="hljs-number">7</span>: astore_1<br>       <span class="hljs-number">8</span>: aload_1<br>       <span class="hljs-number">9</span>: invokevirtual #<span class="hljs-number">4</span>                  <span class="hljs-comment">// Method doSomething:()I</span><br>      <span class="hljs-number">12</span>: istore_2<br>      <span class="hljs-number">13</span>: getstatic     #<span class="hljs-number">5</span>                  <span class="hljs-comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span><br>      <span class="hljs-number">16</span>: iload_2<br>      <span class="hljs-number">17</span>: invokevirtual #<span class="hljs-number">6</span>                  <span class="hljs-comment">// Method java/io/PrintStream.println:(I)V</span><br>      <span class="hljs-number">20</span>: <span class="hljs-keyword">return</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+              <h1 id="Java与kotlin对比学习一"><a href="#Java与kotlin对比学习一" class="headerlink" title="Java与kotlin对比学习一"></a><em>Java</em>与<em>kotlin</em>对比学习一</h1><ul>
+<li><h3 id="构造函数、声明属性对比"><a href="#构造函数、声明属性对比" class="headerlink" title="构造函数、声明属性对比"></a>构造函数、声明属性对比</h3></li>
 </ul>
-<p>​ 下面我们再挖深一些，进一步揭开 JVM 的面纱：</p>
-<p>​ 我们先了解一下<em>Java</em>的<strong>运行时数据区</strong>(<em>Runtime Date Area</em>)，<em>Java</em>程序被运行时，内存中运行时数据区会被分为五部分，见下图。</p>
-<p>​ <em>Java</em>程序运行是按线程来操作的，在线程栈中运行多个线程。每一个<strong>线程</strong>都有一个自己的<strong>栈帧</strong>，而每一个栈帧又包含局部变量、操作数栈、动态链接、方法出口四部分。上述就是在 main 线程里面的栈帧进行的。这里还要讲解一下，<strong>函数出口记录</strong>的问题。</p>
-<p>​ 就上述<em>Java</em>代码而言，显然，程序需要从 main 函数进入<em>doSomething</em>函数，再返回 main 函数，为了不迷路，<em>Java</em>采用”<strong>标记</strong>“的方法记录出口，上述的*.class<em>文件中的#2 等等就是”标记“。当<code>new</code>一个新的对象时上述代码调用了默认构造函数，此时就需要进入该构造函数，</em>Java<em>离开 main 函数留下”标记“，java 进入函数时又留下”标记“，如此，进入不同函数，它就知道运行时如何返回</em>main*函数了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> age;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Person</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Person</span><span class="hljs-params">(String name, <span class="hljs-type">int</span> age)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.age = age;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><em>Java</em>的构造函数非常直接，类型修饰符+类名+()，若有属性，则再（）中加入参数，与 C++语言有异曲同工之妙，而<em>Kotlin</em>胜在**精简 **</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-keyword">constructor</span> </span>(aName: String, aAge: <span class="hljs-built_in">Int</span>) &#123;  <span class="hljs-comment">// 临时定义变量保存外部传过来的值</span><br>    <span class="hljs-keyword">var</span> name: String = aName   <span class="hljs-comment">// aName, aAge是临时的，真正定义并完成初始化操作</span><br>    <span class="hljs-keyword">var</span> age: <span class="hljs-built_in">Int</span> = age<br>&#125;<br><span class="hljs-comment">// 或在初始化块中调用</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-keyword">constructor</span> </span>(aName: String, aAge: <span class="hljs-built_in">Int</span>) &#123;<br>    <span class="hljs-keyword">var</span> name: String = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">var</span> age: <span class="hljs-built_in">Int</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">init</span> &#123;<br>        name = aName<br>        age = aAge<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><em>kotlin</em>还可以直接在<em>constructor</em>内部<strong>直接</strong>声明属性，与<em>Java</em>相比<strong>更加精简</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-keyword">constructor</span> </span>(<span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> name: String, <span class="hljs-keyword">var</span> age: <span class="hljs-built_in">Int</span>) &#123; <span class="hljs-comment">// 在主构造函数中直接声明属性</span><br>    <span class="hljs-keyword">var</span> score = <span class="hljs-number">99</span>  <span class="hljs-comment">// 需要在创建对象时给予初始值的属性才放到主构造函数中</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
-<li><h3 id="图表"><a href="#图表" class="headerlink" title="图表"></a>图表</h3><img src="/postImage/img-1.jpg" srcset="/img/loading.gif" lazyload /></li>
+<li><h3 id="定义函数对比"><a href="#定义函数对比" class="headerlink" title="定义函数对比"></a>定义函数对比</h3><ul>
+<li><p>无参无返回值的函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;&#125;  <span class="hljs-comment">// java</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>: <span class="hljs-built_in">Unit</span> &#123;&#125;   <span class="hljs-comment">// Kotlin</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>有参无返回值的函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>&#123;&#125;   <span class="hljs-comment">// java</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">test</span><span class="hljs-params">(a: <span class="hljs-type">Int</span>, b: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Unit</span>&#123;&#125;   <span class="hljs-comment">// kotlin</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>有参有返回值的函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">test</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>    <span class="hljs-keyword">return</span> a + b;                  <span class="hljs-comment">// java</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">test</span><span class="hljs-params">(a: <span class="hljs-type">Int</span>, b: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> &#123;<br>    <span class="hljs-keyword">return</span> a + b 				   <span class="hljs-comment">// kotlin</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>如果函数只有一行，也可写为下述形式</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">test</span><span class="hljs-params">(a: <span class="hljs-type">Int</span>, b: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> = a + b<br><span class="hljs-comment">// 甚至返回值类型也可省略</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">test</span><span class="hljs-params">(a: <span class="hljs-type">Int</span>, b: <span class="hljs-type">Int</span>)</span></span> = a + b<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ul>
 
               
@@ -355,6 +356,8 @@
       
         <a href="/tags/Java/">#Java</a>
       
+        <a href="/tags/Kotlin/">#Kotlin</a>
+      
     </div>
   
 </div>
@@ -365,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Java代码运行深层原理</div>
-      <div>http://eminent-yaoyilin.com/2022/06/02/Java代码运行深层原理/</div>
+      <div>java与kotlin对比学习</div>
+      <div>http://eminent-yaoyilin.com/2022/06/02/java与kotlin对比学习/</div>
     </div>
     <div class="license-meta">
       
@@ -413,9 +416,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/02/java%E4%B8%8Ekotlin%E5%AF%B9%E6%AF%94%E5%AD%A6%E4%B9%A0/" title="java与kotlin对比学习">
+                      <a href="/2022/06/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux常用命令">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">java与kotlin对比学习</span>
+                        <span class="hidden-mobile">Linux常用命令</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -423,8 +426,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/02/Java%E6%B3%9B%E5%9E%8B%E4%B8%8EKotlin%E9%AB%98%E9%98%B6%E8%AF%AD%E6%B3%95%E7%B3%96/" title="Java泛型与Kotlin高阶语法糖">
-                        <span class="hidden-mobile">Java泛型与Kotlin高阶语法糖</span>
+                      <a href="/2022/06/02/Java%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E6%B7%B1%E5%B1%82%E5%8E%9F%E7%90%86/" title="Java代码运行深层原理">
+                        <span class="hidden-mobile">Java代码运行深层原理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
