@@ -12,6 +12,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="Ezralin">
   <meta name="keywords" content="">
@@ -155,6 +157,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -177,13 +191,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/imageSelf/browserTab.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+            <span id="subtitle" data-typed-text="蓦然回首，那人却在灯火阑珊处"></span>
           
         </div>
 
@@ -218,7 +232,80 @@
   <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/02/Java%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E6%B7%B1%E5%B1%82%E5%8E%9F%E7%90%86/" target="_self">
+          <img src="/imageSelf/paper02.jfif" srcset="/img/loading.gif" lazyload alt="Java代码运行深层原理">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/02/Java%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E6%B7%B1%E5%B1%82%E5%8E%9F%E7%90%86/" target="_self">
+          Java代码运行深层原理
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/06/02/Java%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E6%B7%B1%E5%B1%82%E5%8E%9F%E7%90%86/" target="_self">
+        <div>
+          JVM 浅谈 Java 构造对象浅谈​ 在日常编程中，我们不假思索地使用new去新建一个对象，但 Java是如何在底层进行对象的创建？如何在底层完成对象的创建并进行初始化？下面我们来探讨以下这个问题： Animal animal&#x3D;new Animal() 上行代码是对象实例化的过程，在程序中执行这行代码，将会经历以下过程：  在方法区寻找 Animal 类的信息  判断 Java编译后的字节码里面
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-02 13:20" pubdate>
+              2022-06-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E5%AD%A6%E4%B9%A0/" class="category-chain-item">Java学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java/">#java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/06/02/Java%E6%B3%9B%E5%9E%8B%E4%B8%8EKotlin%E9%AB%98%E9%98%B6%E8%AF%AD%E6%B3%95%E7%B3%96/" target="_self">
+          <img src="/imageSelf/paper01.jfif" srcset="/img/loading.gif" lazyload alt="Java泛型与Kotlin高阶语法糖">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
         <a href="/2022/06/02/Java%E6%B3%9B%E5%9E%8B%E4%B8%8EKotlin%E9%AB%98%E9%98%B6%E8%AF%AD%E6%B3%95%E7%B3%96/" target="_self">
@@ -227,9 +314,9 @@
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/02/Java%E6%B3%9B%E5%9E%8B%E4%B8%8EKotlin%E9%AB%98%E9%98%B6%E8%AF%AD%E6%B3%95%E7%B3%96/" target="_self">
+      <a class="index-excerpt " href="/2022/06/02/Java%E6%B3%9B%E5%9E%8B%E4%B8%8EKotlin%E9%AB%98%E9%98%B6%E8%AF%AD%E6%B3%95%E7%B3%96/" target="_self">
         <div>
-          Java泛型与Kotlin高阶函数语法糖 java泛型 什么是泛型？ 泛指一切类型  常使用 T R V K I O 表示  协变与形变  1234567891011121314151617181920212223class MyClass &amp;#123;    public static void main(String[] args) &amp;#123;        List&lt;Object&amp;g
+          Kotlin高阶函数语法糖
         </div>
       </a>
 
@@ -243,39 +330,34 @@
           </div>
         
         
-        
-      </div>
-    </article>
-  </div>
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
 
-  <div class="row mx-auto index-card">
+<span class="category-chains">
+  
+  
     
+      <span class="category-chain">
+        
+  <a href="/categories/Kotlin%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E8%BF%90%E7%94%A8/" class="category-chain-item">Kotlin高阶函数运用</a>
+  
+  
+
+      </span>
     
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/01/hello-world/" target="_self">
-          Hello World
-        </a>
-      </h1>
+  
+</span>
 
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/01/hello-world/" target="_self">
-        <div>
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-01 21:00" pubdate>
-              2022-05-01
-            </time>
           </div>
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/kotlin/">#kotlin</a>
+            
+          </div>
         
       </div>
     </article>
@@ -329,7 +411,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/destroyerngu" target="_blank" rel="nofollow noopener"><span>Ezralin</span></a> 
     </div>
   
   
