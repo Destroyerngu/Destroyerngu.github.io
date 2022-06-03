@@ -21,17 +21,17 @@
     <meta name="description" content="JVM 浅谈 Java 构造对象浅谈​ 在日常编程中，我们不假思索地使用new去新建一个对象，但 Java是如何在底层进行对象的创建？如何在底层完成对象的创建并进行初始化？下面我们来探讨以下这个问题： Animal animal&#x3D;new Animal() 上行代码是对象实例化的过程，在程序中执行这行代码，将会经历以下过程：  在方法区寻找 Animal 类的信息  判断 Java编译后的字节码里面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java代码运行深层原理">
-<meta property="og:url" content="http://eminent-yaoyilin.com/2022/06/02/Java%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E6%B7%B1%E5%B1%82%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:url" content="https://eminent-yaoyilin.com/2022/06/02/Java%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E6%B7%B1%E5%B1%82%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Ezralin&#39;blog">
 <meta property="og:description" content="JVM 浅谈 Java 构造对象浅谈​ 在日常编程中，我们不假思索地使用new去新建一个对象，但 Java是如何在底层进行对象的创建？如何在底层完成对象的创建并进行初始化？下面我们来探讨以下这个问题： Animal animal&#x3D;new Animal() 上行代码是对象实例化的过程，在程序中执行这行代码，将会经历以下过程：  在方法区寻找 Animal 类的信息  判断 Java编译后的字节码里面">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://eminent-yaoyilin.com/imageSelf/paper02.jfif">
+<meta property="og:image" content="https://eminent-yaoyilin.com/imageSelf/paper02.jfif">
 <meta property="article:published_time" content="2022-06-02T05:20:42.000Z">
 <meta property="article:modified_time" content="2022-06-02T15:29:24.187Z">
 <meta property="article:author" content="Ezralin">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://eminent-yaoyilin.com/imageSelf/paper02.jfif">
+<meta name="twitter:image" content="https://eminent-yaoyilin.com/imageSelf/paper02.jfif">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -75,7 +75,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"eminent-yaoyilin.com","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"eminent-yaoyilin.com","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -366,7 +366,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Java代码运行深层原理</div>
-      <div>http://eminent-yaoyilin.com/2022/06/02/Java代码运行深层原理/</div>
+      <div>https://eminent-yaoyilin.com/2022/06/02/Java代码运行深层原理/</div>
     </div>
     <div class="license-meta">
       
