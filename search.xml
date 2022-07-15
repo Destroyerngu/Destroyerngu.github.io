@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Android DataBinding进阶使用</title>
+      <link href="/2022/07/15/Android-DataBinding%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/"/>
+      <url>/2022/07/15/Android-DataBinding%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Android-DataBinding进阶使用"><a href="#Android-DataBinding进阶使用" class="headerlink" title="Android DataBinding进阶使用"></a>Android DataBinding进阶使用</h1><h2 id="DataBinding优劣"><a href="#DataBinding优劣" class="headerlink" title="DataBinding优劣"></a>DataBinding优劣</h2><ul><li><p>advantage</p><p><strong>将UI和数据之间的交互从Activity中分离</strong>，从而使得MainActivity变成了一个“中介”,服务于逻辑数据与界面layout之间，进而使得数据与UI的绑定在xml中即可实现，</p></li><li><p>disadvantage</p><p>因为多了媒介，所以需要增加多的开销（代码量与代码操作）</p></li></ul><hr><h2 id="DataBinding中如何绑定数据"><a href="#DataBinding中如何绑定数据" class="headerlink" title="DataBinding中如何绑定数据"></a>DataBinding中如何绑定数据</h2><h3 id="1-DataBinding中如何绑定数据"><a href="#1-DataBinding中如何绑定数据" class="headerlink" title="1.DataBinding中如何绑定数据"></a>1.DataBinding中如何绑定数据</h3><p><strong>注意</strong>：此处的数据包括变量，方法，事件，即变量、方法、事件均可以被绑定</p><p>  <strong>预先准备</strong>：convert to data binding layout </p><h3 id="a-绑定一个变量"><a href="#a-绑定一个变量" class="headerlink" title="a. 绑定一个变量"></a>a. 绑定一个变量</h3><p> 在Data区域声明一个variable 在属性中使用@{}访问变量的值</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">android:text=&quot;@&#123;mViewModel.title&#125;&quot;</span><br><span class="line">android:text=&quot;@&#123;String.valueOf(mViewModel.number)&#125;&quot;</span><br></pre></td></tr></table></figure><h3 id="b-绑定一个方法"><a href="#b-绑定一个方法" class="headerlink" title="b. 绑定一个方法"></a>b. 绑定一个方法</h3><p>   如果数据源里面的数据不能直接显示，需要做额外的处理，就需要<strong>自己定义绑定的事件</strong>(常用)<br>   <strong>特点</strong>：界面被加载的时候就会被调用</p><ol><li><p>在一个文件中定义自己的绑定事件 BindingAdapters</p></li><li><p>需要在build.gradle中添加plugin ‘kotlin-kapt’</p></li><li><p>在文件中定义方法——对应控件的扩展方法</p><ul><li><p>方式一</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BindingAdapter(<span class="string">&quot;loadImage&quot;</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> ImageView.<span class="title">loadImage</span><span class="params">(url: <span class="type">String</span>)</span></span>&#123;</span><br><span class="line"><span class="keyword">this</span>.load(url)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>方式二</p><p>使用独立方法，需要一个当前这个控件作为参数</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BindingAdapter(<span class="string">&quot;loadImage2&quot;</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">loadImage2</span><span class="params">(imageView:<span class="type">ImageView</span>,url: <span class="type">String</span>)</span></span>&#123;</span><br><span class="line">        imageView.load(url)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>xml中像普通属性一样去使用这个方法</p>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loadImage=&quot;@&#123;mViewModel.imageUrl&#125;&quot;</span><br></pre></td></tr></table></figure></li></ol><h3 id="c-绑定一个事件"><a href="#c-绑定一个事件" class="headerlink" title="c. 绑定一个事件"></a>c. 绑定一个事件</h3><p>  把事件所在的类传递给xml中绑定的变量</p><ol><li><p>在某个类中定义好对应的方法，注意：一定要接收一个参数类型为View</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">changeBackgroundColor</span><span class="params">(view: <span class="type">View</span>)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li><li><p>在xml中绑定一个变量，类型就是当前这个方法所在的类</p> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">variable</span></span></span><br><span class="line"><span class="tag">      <span class="attr">name</span>=<span class="string">&quot;mainActivity&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">type</span>=<span class="string">&quot;com.example.eventbinding.MainActivity&quot;</span> </span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>在控件的onClick方法中绑定对应的方法</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:onClick=&quot;@&#123;(view)-&gt;mainActivity.changeBackgroundColor(view)&#125;&quot;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Android绑定与监听</title>
       <link href="/2022/07/14/Android%E7%BB%91%E5%AE%9A%E4%B8%8E%E7%9B%91%E5%90%AC/"/>
       <url>/2022/07/14/Android%E7%BB%91%E5%AE%9A%E4%B8%8E%E7%9B%91%E5%90%AC/</url>
