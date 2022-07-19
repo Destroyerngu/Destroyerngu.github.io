@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Android触摸事件 | 妖</title><meta name="keywords" content="Android"><meta name="author" content="Ezralin"><meta name="copyright" content="Ezralin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Android触摸事件前言（Very Important） 事件是由系统来处理，当触摸到⼿机屏幕时，系统会将此触摸封装为MotionEvent事件，如果有监听这个触摸事件的对象，就会去执⾏对象中重写的onTouchEvent⽅法，并且传递当前的MotionEvent事件。  界⾯中如果有多个控件(层级先后排列)，这个事件优先被最外层的视图得到，如果外层不处理，就会向下传递事件。如果已经处理了， 事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android触摸事件">
+<meta property="og:url" content="https://eminent-yaoyilin.com/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/index.html">
+<meta property="og:site_name" content="妖">
+<meta property="og:description" content="Android触摸事件前言（Very Important） 事件是由系统来处理，当触摸到⼿机屏幕时，系统会将此触摸封装为MotionEvent事件，如果有监听这个触摸事件的对象，就会去执⾏对象中重写的onTouchEvent⽅法，并且传递当前的MotionEvent事件。  界⾯中如果有多个控件(层级先后排列)，这个事件优先被最外层的视图得到，如果外层不处理，就会向下传递事件。如果已经处理了， 事">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071901.jpg">
+<meta property="article:published_time" content="2022-07-19T14:12:29.000Z">
+<meta property="article:modified_time" content="2022-07-19T14:25:33.668Z">
+<meta property="article:author" content="Ezralin">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071901.jpg"><link rel="shortcut icon" href="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20aboutPage.jpg"><link rel="canonical" href="https://eminent-yaoyilin.com/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Ezralin","link":"Link: ","source":"Source: 妖","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Android触摸事件',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-19 22:25:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20aboutPage.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071902.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">妖</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Android触摸事件</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-07-19T14:12:29.000Z" title="Created 2022-07-19 22:12:29">2022-07-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-07-19T14:25:33.668Z" title="Updated 2022-07-19 22:25:33">2022-07-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Android%E5%BC%80%E5%8F%91/">Android开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>6min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Android触摸事件"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Android触摸事件"><a href="#Android触摸事件" class="headerlink" title="Android触摸事件"></a>Android触摸事件</h1><h2 id="前言（Very-Important）"><a href="#前言（Very-Important）" class="headerlink" title="前言（Very Important）"></a>前言（<em>Very Important</em>）</h2><ol>
+<li><p>事件是由系统来处理，当触摸到⼿机屏幕时，系统会将此触摸封装为MotionEvent事件，如果有监听这个触摸事件的对象，就会去执⾏对象中重写的onTouchEvent⽅法，并且传递当前的MotionEvent事件。</p>
+</li>
+<li><p>界⾯中如果有多个控件(层级先后排列)，这个事件优先被最外层的视图得到，如果外层不处理，就会向下传递事件。如果已经处理了， 事件的传递就结束了。如果都不处理，交给MainActivity处理，如果 Activity中不处理，事件就丢失了。</p>
+</li>
+<li><p>不宜在监听触摸事件的方法中测算某容器高度，因为这一般会导致重复调用测算的方法</p>
+</li>
+<li><p>onCreate -&gt; onStart -&gt;onResume -&gt; 界面才真正测量，并开始布局，进行渲染（即绘制），所以测量某控件位置，应当在绘制之前，即使用viewTreeObserver.addPreDrawListener{},并在此方法内测量，此方法的返回值若为true，则继续进行绘制，为false，则取消绘制</p>
+</li>
+<li><p>MotionEvent类内调用getAction()获取对应的事件类型</p>
+<ul>
+<li>ACTION_DOWN 触摸按下</li>
+<li>ACTION_MOVE 触摸移动</li>
+<li>ACTION_UP 触摸抬起</li>
+<li>ACTION_CANCEL其他事件中断这个触摸事件（一般不需要考虑）</li>
+</ul>
+</li>
+<li><p>每次触摸，必定包括触摸按下（ACTION_DOWN）和触摸抬起（ACTION_UP）这<strong>两起</strong>事件</p>
+</li>
+<li><p>MotionEvent类内已经内置获取触摸点的X,Y的方法，使用<code>getX()</code>，<code>getY()</code>可以获取触摸点的坐标，获取的X和Y为相对于整个windows的偏移量，一般会直接使用<code>?.x</code>，<code>?.y</code>获取</p>
+</li>
+<li><p>常用Rect对象或RectF对象封装矩形区域的坐标，需要传入四个参数，left, top, right, bottom，本质上需要矩形左上顶点和右下顶点的坐标，即可确定一个矩形区域</p>
+</li>
+<li><p>获取statusBar高度(不多说，重要)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> resId = resources.getIdentifier(</span><br><span class="line">	<span class="string">&quot;status_bar_height&quot;</span>,</span><br><span class="line">    <span class="string">&quot;dimen&quot;</span>,</span><br><span class="line">    <span class="string">&quot;android&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">val</span> statusBarHeight = resources.getDimensionPixelSize(resId)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+
+<h2 id="如何给视图添加触摸事件"><a href="#如何给视图添加触摸事件" class="headerlink" title="如何给视图添加触摸事件"></a>如何给视图添加触摸事件</h2><ol>
+<li>监听触摸事件</li>
+<li>判断触摸点是否在触摸范围内</li>
+</ol>
+<p><strong>注意</strong></p>
+<ul>
+<li><p>触摸点坐标相对于整个父容器（如果是在MainActivity中，则父容器为手机屏幕，坐标原点为手机显示部分左上角顶点）</p>
+</li>
+<li><p>使用<code>resources.displayMetrics.?</code>获取屏幕高度（手机可显示屏幕减去手机顶部状态栏部分）</p>
+</li>
+<li>  <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">container.viewTreeObserver.addOnPreDrawListener&#123;</span><br><span class="line">          <span class="comment">//获取测量的高度</span></span><br><span class="line">          <span class="keyword">val</span> containerHeight = container.measuredHeight</span><br><span class="line">          <span class="comment">// 屏幕的高度</span></span><br><span class="line">          <span class="keyword">val</span> screenHeight = resources.displayMetrics.heightPixels</span><br><span class="line">          <span class="comment">//status bar height</span></span><br><span class="line">          <span class="keyword">val</span> resid = resources.getIdentifier(</span><br><span class="line">              <span class="string">&quot;status_bar_height&quot;</span>,</span><br><span class="line">              <span class="string">&quot;dimen&quot;</span>,</span><br><span class="line">              <span class="string">&quot;android&quot;</span></span><br><span class="line">          )</span><br><span class="line">          <span class="keyword">val</span> statusBarHeight = resources.getDimensionPixelSize(resid)</span><br><span class="line">  		<span class="comment">//bar的高度 = 屏幕高度 - 容器的高度 + 顶部状态栏的高度</span></span><br><span class="line">          barHeight = screenHeight - containerHeight + statusBarHeight</span><br><span class="line">          <span class="literal">true</span> <span class="comment">//继续绘制过程  false 取消当前绘制</span></span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如要获取状态栏的高度，需要先获取其资源id，再通过其资源id去获取状态栏的高度</p>
+</li>
+<li><p><strong>视图切换</strong>，视图是相对内容区域， 触摸点是相对与整个屏幕而言的</p>
+</li>
+</ul>
+<hr>
+
+<h2 id="1-监听触摸事件"><a href="#1-监听触摸事件" class="headerlink" title="1.监听触摸事件"></a>1.监听触摸事件</h2><ol>
+<li><p>监听触摸事件，也称为<strong>处理</strong>触摸事件</p>
+</li>
+<li><p>监听触摸事件，必须重写<strong>onTouchEvent</strong>方法，并使此方法的返回值改为<strong>true</strong></p>
+</li>
+</ol>
+<p>代码示例</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onTouchEvent</span><span class="params">(event: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="comment">//获取事件类型</span></span><br><span class="line">        <span class="keyword">when</span>(event?.action)&#123;</span><br><span class="line">            <span class="comment">// 一般在程序中会将dealWithTouchPoint方法封装</span></span><br><span class="line">            MotionEvent.ACTION_DOWN -&gt; dealWithTouchPoint(event.x,event.y)</span><br><span class="line">            MotionEvent.ACTION_MOVE -&gt; dealWithTouchPoint(event.x,event.y)</span><br><span class="line">            MotionEvent.ACTION_UP -&gt; &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-判断触摸点是否在触摸范围内"><a href="#2-判断触摸点是否在触摸范围内" class="headerlink" title="2.判断触摸点是否在触摸范围内"></a>2.判断触摸点是否在触摸范围内</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 外部需要传入触摸点的坐标（该坐标相对于**父容器**）</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">dealWithTouchPoint</span><span class="params">(x:<span class="type">Float</span>, y:<span class="type">Float</span>)</span></span>&#123;</span><br><span class="line">        <span class="comment">//获取view的矩形区域 x,y,w,h</span></span><br><span class="line">        <span class="keyword">val</span> view = findViewById&lt;View&gt;(R.id.view)</span><br><span class="line">        <span class="keyword">val</span> viewRect = Rect(</span><br><span class="line">            view.x.toInt(),</span><br><span class="line">            view.y.toInt(),</span><br><span class="line">            (view.x+view.width).toInt(),</span><br><span class="line">            (view.y+view.height).toInt(),</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断触摸点 是否在矩形区域内</span></span><br><span class="line">        <span class="keyword">if</span> (viewRect.contains(x.toInt(),(y-barHeight).toInt()))&#123;</span><br><span class="line">            <span class="comment">// 如果触摸点在矩形区域内，具体要做什么</span></span><br><span class="line">            <span class="comment">// 至此，监听触摸事件才算完成</span></span><br><span class="line">            view.setBackgroundColor(Color.BLACK)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将视图从xml中独立出来"><a href="#将视图从xml中独立出来" class="headerlink" title="将视图从xml中独立出来"></a>将视图从xml中独立出来</h2><ol>
+<li>res.layout包内新建相应的layout文件</li>
+<li>在activity_main.xml中使用include应用此视图</li>
+</ol>
+<h2 id="单独给xml中某个视图添加触摸事件"><a href="#单独给xml中某个视图添加触摸事件" class="headerlink" title="单独给xml中某个视图添加触摸事件"></a>单独给xml中某个视图添加触摸事件</h2><p><strong>此方法也可运用于那些独立于xml的视图</strong></p>
+<p>运用<code>setOnTouchListener</code>单独给某个视图添加触摸事件</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意：此堆代码须在onCreate方法中书写</span></span><br><span class="line"><span class="comment">// 此触摸事件范围仅在触摸该视图内有效</span></span><br><span class="line"><span class="keyword">val</span> view = findViewById&lt;View&gt;(R.id.unlockView)</span><br><span class="line">        view.setOnTouchListener&#123; _, event -&gt;</span><br><span class="line">            <span class="keyword">if</span> (event.action == MotionEvent.ACTION_DOWN)&#123;</span><br><span class="line">                view.setBackgroundColor(Color.BLACK)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="literal">true</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+<h2 id="新建类中实现视图并使用代码添加触摸事件"><a href="#新建类中实现视图并使用代码添加触摸事件" class="headerlink" title="新建类中实现视图并使用代码添加触摸事件"></a>新建类中实现视图并使用代码添加触摸事件</h2><ol>
+<li><p>必须重写父类的构造函数</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUnlockView</span>: <span class="type">View &#123;</span></span></span><br><span class="line">    <span class="comment">//代码中创建这个控件时，会调用这个构造函数</span></span><br><span class="line">   <span class="keyword">constructor</span>(context: Context):<span class="keyword">super</span>(context)&#123;&#125;</span><br><span class="line">    <span class="comment">//xml中拖拽控件就会调用这个构造函数，并且把控件的所有属性封装为AttributeSet类型</span></span><br><span class="line">   <span class="keyword">constructor</span>(context: Context, attrs:AttributeSet?):<span class="keyword">super</span>(context,attrs)&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//xml 使用style资源id</span></span><br><span class="line">    <span class="keyword">constructor</span>(context: Context,</span><br><span class="line">                attrs:AttributeSet?,</span><br><span class="line">                style:<span class="built_in">Int</span></span><br><span class="line">               ):<span class="keyword">super</span>(context,attrs,style)&#123;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>封装触摸事件（即重写触摸事件</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onTouchEvent</span><span class="params">(event: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        setBackgroundColor(Color.BLACK)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+
+<h2 id="自定义父容器实现相应子类的触摸事件"><a href="#自定义父容器实现相应子类的触摸事件" class="headerlink" title="自定义父容器实现相应子类的触摸事件"></a>自定义父容器实现相应子类的触摸事件</h2><ol>
+<li><p>定义一个类继承于ViewGroup</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUnlockView</span>: <span class="type">View &#123;</span></span></span><br><span class="line">    <span class="comment">//代码中创建这个控件时，会调用这个构造函数</span></span><br><span class="line">   <span class="keyword">constructor</span>(context: Context):<span class="keyword">super</span>(context)&#123;&#125;</span><br><span class="line">    <span class="comment">//xml中拖拽控件就会调用这个构造函数，并且把控件的所有属性封装为AttributeSet类型</span></span><br><span class="line">   <span class="keyword">constructor</span>(context: Context, attrs:AttributeSet?):<span class="keyword">super</span>(context,attrs)&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//xml 使用style资源id</span></span><br><span class="line">    <span class="keyword">constructor</span>(context: Context,</span><br><span class="line">                attrs:AttributeSet?,</span><br><span class="line">                style:<span class="built_in">Int</span></span><br><span class="line">               ):<span class="keyword">super</span>(context,attrs,style)&#123;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写onSizeChanged方法，可以获取宽高，添加控件</p>
+<blockquote>
+<p>This is called during layout when the size of this view has changed. If you were just added to the view hierarchy, you’re called with the old values of 0.</p>
+</blockquote>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在这个方法里面 容器的尺寸就确定了</span></span><br><span class="line">    <span class="comment">//1.获取容器的宽 高</span></span><br><span class="line">    <span class="comment">//2.添加子控件</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSizeChanged</span><span class="params">(w: <span class="type">Int</span>, h: <span class="type">Int</span>, oldw: <span class="type">Int</span>, oldh: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> view = ImageView(context).apply &#123;</span><br><span class="line">            setImageResource(R.drawable.bg)</span><br><span class="line">            visibility = INVISIBLE</span><br><span class="line">        &#125;</span><br><span class="line">        addView(view)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写onLayout方法，对所有子控件进行布局</p>
+<p><strong>注意</strong>：除了在xml中设置控件大小时可以使用单位，不要单位设置控件大小时，单位为像素</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子控件如何布局 如何显示 宽度 高度  x  y</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onLayout</span><span class="params">(changed: <span class="type">Boolean</span>, l: <span class="type">Int</span>, t: <span class="type">Int</span>, r: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">//查找自己的子控件 </span></span><br><span class="line">        <span class="keyword">val</span> iv = getChildAt(<span class="number">0</span>)</span><br><span class="line">        <span class="comment">//布局</span></span><br><span class="line">        iv.layout(dpToPx(<span class="number">20</span>),dpToPx(<span class="number">20</span>),dpToPx(<span class="number">200</span>),dpToPx(<span class="number">200</span>)) </span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 此方法经常使用，使控件大小适配不同手机端</span></span><br><span class="line"> <span class="function"><span class="keyword">fun</span> <span class="title">dpToPx</span><span class="params">(dp:<span class="type">Int</span>)</span></span> = (resources.displayMetrics.density*dp).toInt()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写onTouchEvent方法监听触摸事件</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onTouchEvent</span><span class="params">(event: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (event?.action == MotionEvent.ACTION_DOWN)&#123;</span><br><span class="line">            <span class="keyword">val</span> iv = getChildAt(<span class="number">0</span>) <span class="keyword">as</span> ImageView</span><br><span class="line">            iv.visibility = VISIBLE</span><br><span class="line">            <span class="comment">//iv.setImageResource(R.drawable.calculate)</span></span><br><span class="line">        &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在xml或者代码中使用这个控件</p>
+<p>仅举例xml中使用此控件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 注意开头</span><br><span class="line"><span class="tag">&lt;<span class="name">com.example.touchevent.MyUnlockView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;200dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;200dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:visibility</span>=<span class="string">&quot;invisible&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eminent-yaoyilin.com">Ezralin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eminent-yaoyilin.com/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/">https://eminent-yaoyilin.com/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android</a></div><div class="post_share"><div class="social-share" data-image="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071901.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/17/Android%E5%88%9B%E5%BB%BA%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/"><img class="next-cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20cover_img08.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Android创建控件的三种方法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/07/13/Android%E4%B9%8B%E8%87%AA%E4%BF%A1demo/" title="Android之自信demo"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022062306.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-13</div><div class="title">Android之自信demo</div></div></a></div><div><a href="/2022/07/15/Android-DataBinding%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/" title="Android DataBinding进阶使用"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071303.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-15</div><div class="title">Android DataBinding进阶使用</div></div></a></div><div><a href="/2022/07/17/Android%E5%88%9B%E5%BB%BA%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" title="Android创建控件的三种方法"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20cover_img08.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-17</div><div class="title">Android创建控件的三种方法</div></div></a></div><div><a href="/2022/07/14/Android%E7%BB%91%E5%AE%9A%E4%B8%8E%E7%9B%91%E5%90%AC/" title="Android绑定与监听"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071304.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-14</div><div class="title">Android绑定与监听</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20aboutPage.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ezralin</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/destroyerngu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/destroyerngu" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2529687390@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">幡然醒悟,为时未晚,当毅然前行,不负此生</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">Android触摸事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%88Very-Important%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">前言（Very Important）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%BB%99%E8%A7%86%E5%9B%BE%E6%B7%BB%E5%8A%A0%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">如何给视图添加触摸事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%9B%91%E5%90%AC%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">1.监听触摸事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%A4%E6%96%AD%E8%A7%A6%E6%91%B8%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E8%A7%A6%E6%91%B8%E8%8C%83%E5%9B%B4%E5%86%85"><span class="toc-number">1.4.</span> <span class="toc-text">2.判断触摸点是否在触摸范围内</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E8%A7%86%E5%9B%BE%E4%BB%8Exml%E4%B8%AD%E7%8B%AC%E7%AB%8B%E5%87%BA%E6%9D%A5"><span class="toc-number">1.5.</span> <span class="toc-text">将视图从xml中独立出来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E7%BB%99xml%E4%B8%AD%E6%9F%90%E4%B8%AA%E8%A7%86%E5%9B%BE%E6%B7%BB%E5%8A%A0%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.6.</span> <span class="toc-text">单独给xml中某个视图添加触摸事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E7%B1%BB%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%A7%86%E5%9B%BE%E5%B9%B6%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E6%B7%BB%E5%8A%A0%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.7.</span> <span class="toc-text">新建类中实现视图并使用代码添加触摸事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%88%B6%E5%AE%B9%E5%99%A8%E5%AE%9E%E7%8E%B0%E7%9B%B8%E5%BA%94%E5%AD%90%E7%B1%BB%E7%9A%84%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.8.</span> <span class="toc-text">自定义父容器实现相应子类的触摸事件</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/" title="Android触摸事件"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071901.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android触摸事件"/></a><div class="content"><a class="title" href="/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/" title="Android触摸事件">Android触摸事件</a><time datetime="2022-07-19T14:12:29.000Z" title="Created 2022-07-19 22:12:29">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/17/Android%E5%88%9B%E5%BB%BA%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" title="Android创建控件的三种方法"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20cover_img08.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android创建控件的三种方法"/></a><div class="content"><a class="title" href="/2022/07/17/Android%E5%88%9B%E5%BB%BA%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" title="Android创建控件的三种方法">Android创建控件的三种方法</a><time datetime="2022-07-17T13:19:25.000Z" title="Created 2022-07-17 21:19:25">2022-07-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/15/Android-DataBinding%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/" title="Android DataBinding进阶使用"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071303.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android DataBinding进阶使用"/></a><div class="content"><a class="title" href="/2022/07/15/Android-DataBinding%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/" title="Android DataBinding进阶使用">Android DataBinding进阶使用</a><time datetime="2022-07-15T10:31:06.000Z" title="Created 2022-07-15 18:31:06">2022-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/14/Android%E7%BB%91%E5%AE%9A%E4%B8%8E%E7%9B%91%E5%90%AC/" title="Android绑定与监听"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071304.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android绑定与监听"/></a><div class="content"><a class="title" href="/2022/07/14/Android%E7%BB%91%E5%AE%9A%E4%B8%8E%E7%9B%91%E5%90%AC/" title="Android绑定与监听">Android绑定与监听</a><time datetime="2022-07-14T11:45:36.000Z" title="Created 2022-07-14 19:45:36">2022-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/13/Android%E4%B9%8B%E8%87%AA%E4%BF%A1demo/" title="Android之自信demo"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022062306.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android之自信demo"/></a><div class="content"><a class="title" href="/2022/07/13/Android%E4%B9%8B%E8%87%AA%E4%BF%A1demo/" title="Android之自信demo">Android之自信demo</a><time datetime="2022-07-13T14:10:59.000Z" title="Created 2022-07-13 22:10:59">2022-07-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20adjust03.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By Ezralin</div><div class="footer_custom_text">I <a href="https://eminent-yaoyilin.com/">love</a> you</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
