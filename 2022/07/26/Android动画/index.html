@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Android动画 | 妖</title><meta name="keywords" content="Android"><meta name="author" content="Ezralin"><meta name="copyright" content="Ezralin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Android animation前言 动画尽量不要在onCreate中启动，因为此时界面布局都还没有完成，你看到的动画是残缺的 如遇到不清楚的类或属性，建议看优质的博客    帧动画( FrameAnimation)帧动画就是顺序播放一组预先定义好的图片，就类似于我们观看视频，就是一张一张的图片连续播放 如何使用准备 res下drawable包内准备图片资源  drawable内创建animat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android动画">
+<meta property="og:url" content="https://eminent-yaoyilin.com/2022/07/26/Android%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="妖">
+<meta property="og:description" content="Android animation前言 动画尽量不要在onCreate中启动，因为此时界面布局都还没有完成，你看到的动画是残缺的 如遇到不清楚的类或属性，建议看优质的博客    帧动画( FrameAnimation)帧动画就是顺序播放一组预先定义好的图片，就类似于我们观看视频，就是一张一张的图片连续播放 如何使用准备 res下drawable包内准备图片资源  drawable内创建animat">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072602.jpg">
+<meta property="article:published_time" content="2022-07-26T13:52:21.000Z">
+<meta property="article:modified_time" content="2022-07-26T14:10:47.018Z">
+<meta property="article:author" content="Ezralin">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072602.jpg"><link rel="shortcut icon" href="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20aboutPage.jpg"><link rel="canonical" href="https://eminent-yaoyilin.com/2022/07/26/Android%E5%8A%A8%E7%94%BB/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Ezralin","link":"Link: ","source":"Source: 妖","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Android动画',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-26 22:10:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20aboutPage.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072601.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">妖</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Android动画</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-07-26T13:52:21.000Z" title="Created 2022-07-26 21:52:21">2022-07-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-07-26T14:10:47.018Z" title="Updated 2022-07-26 22:10:47">2022-07-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Android%E5%BC%80%E5%8F%91/">Android开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>6min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Android动画"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Android-animation"><a href="#Android-animation" class="headerlink" title="Android animation"></a>Android animation</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>动画尽量不要在onCreate中启动，因为此时界面布局都还没有完成，你看到的动画是残缺的</li>
+<li>如遇到不清楚的类或属性，建议看优质的博客</li>
+</ul>
+<hr>
+
+<h1 id="帧动画-FrameAnimation"><a href="#帧动画-FrameAnimation" class="headerlink" title="帧动画( FrameAnimation)"></a>帧动画( <em>FrameAnimation</em>)</h1><p>帧动画就是顺序播放一组预先定义好的图片，就类似于我们观看视频，就是一张一张的图片连续播放</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><ol>
+<li><p>res下drawable包内准备图片资源</p>
+</li>
+<li><p>drawable内创建animation-list的xml文件，里面使用<code>&lt;item&gt;</code>存放动画图片资源，设置duration控制每一帧图片显示时间，<strong>具体是</strong>在 xml中设置要播放帧动画的图片资源，持续时间，播放属性</p>
+</li>
+<li><p>父容器布局文件中加入一个ImageView，运用src属性配置animation-list文件，建立关联</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--示例--&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">animation-list</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">&quot;@drawable/campfire01&quot;</span> <span class="attr">android:duration</span>=<span class="string">&quot;200&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">&quot;@drawable/campfire02&quot;</span> <span class="attr">android:duration</span>=<span class="string">&quot;200&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">animation-list</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>注意：每个item都有Drawable和duration属性，Drawable表示我们要播放的图片；duration表示这张图播放的时间</p>
+<h4 id="开启动画"><a href="#开启动画" class="headerlink" title="开启动画"></a>开启动画</h4><ol>
+<li><p>MainActivity中重写<code>override fun onStart()</code>方法，运用findViewById找到已经关联动画的图片，键入下列代码</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fire = findViewById&lt;ImageView&gt;(R.id.fire)</span><br><span class="line"><span class="keyword">var</span> animDrawable = fire.drawable <span class="keyword">as</span> AnimationDrawable</span><br><span class="line"> animDrawable.start()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>animDrawable.start()</code>开启帧动画</p>
+</li>
+</ol>
+<hr>
+
+<h1 id="View动画（补间动画）-TweenAnimation"><a href="#View动画（补间动画）-TweenAnimation" class="headerlink" title="View动画（补间动画）(TweenAnimation)"></a>View动画（补间动画）(<em>TweenAnimation</em>)</h1><ul>
+<li><p>view动画也称为补间动画，因为我们只需要拿到一个view，设定它开始和结束的位置，中间的view会自动由系统补齐，而不需要帧动画每一幅图都是提前准备好的。</p>
+</li>
+<li><p>补间动画是Android一开始就提供的比较原始的动画，主要支持四种效果：平移（translate）、缩放（scale）、旋转（rotate）、透明度变化（渐变）（alpha） 四种基本效果，我们可以再这四种基础效果的基础上，选择其中的几种进行组合。</p>
+</li>
+<li><p>补间动画也是Android中常用的动画之一，相对属性动画来说，补间动画的点击事件<strong>不会跟着动画的位置变化而变化</strong>。因为属性动画的点击事件会<strong>随着动画的位置变化而变化</strong>，后续将逐渐被<strong>属性动画</strong>替代</p>
+</li>
+<li><p>View动画的四种基本效果分别对应Animation的四个子类</p>
+</li>
+<li><p>pivotX pivotY为缩放的中⼼点</p>
+<p><img src="https://img-blog.csdnimg.cn/20190621225246708.png"></p>
+</li>
+</ul>
+<h2 id="补间动画属性"><a href="#补间动画属性" class="headerlink" title="补间动画属性"></a>补间动画属性</h2><ol>
+<li><p>duration 动画时⻓</p>
+</li>
+<li><p>fillAfter 是否保持动画结束状态，fillBefore 是否保持动画起始状态</p>
+</li>
+<li><p>interpolator 插值器，动画运动速率</p>
+<ul>
+<li>LinearInterpolator</li>
+<li>BounceInterpolator</li>
+<li>AccelerateInterpolator</li>
+<li>DecelerateInterpolator</li>
+</ul>
+</li>
+<li><p>repeatCount 重复次数 infinite表示⽆限次</p>
+</li>
+<li><p>repeatMode 重复⽅式 </p>
+<ul>
+<li>RESTART </li>
+<li>REVERSE</li>
+</ul>
+</li>
+<li><p>cancel() 取消动画</p>
+</li>
+<li><p>setAnimationListener 监听动画事件</p>
+<ul>
+<li>onAnimationStart</li>
+<li>onAnimationEnd</li>
+<li>onAnimationRepeat</li>
+</ul>
+</li>
+</ol>
+<p>注意：50% 相对于⾃身宽度50%，50%p 相对于⽗容器宽度的50%</p>
+<h2 id="补间动画常用"><a href="#补间动画常用" class="headerlink" title="补间动画常用"></a>补间动画常用</h2><ol>
+<li>透明动画 AlphaAnimation</li>
+<li>旋转动画 ScaleAnimation</li>
+<li>缩放动画 RotateAnimation</li>
+<li>平移动画 TranslateAnimation</li>
+<li>动画集合 AnimationSet</li>
+<li>XML 实现动画效果</li>
+</ol>
+<h3 id="如何使用-1"><a href="#如何使用-1" class="headerlink" title="如何使用"></a>如何使用</h3><ol>
+<li><ul>
+<li><p><strong>代码创建</strong></p>
+</li>
+<li><p><strong>xml中定义</strong></p>
+<ul>
+<li>在res资源下，新建一个anim资源包，内部新建一个xml资源文件，根元素为 translate，scale，rotate，alpha，set</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在这个xml文件内，设置相应的属性（在此仅说明xml文件定义的方法）</p>
+<p>Scale举例</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">scale</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fromXScale</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fromYScale</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:toXScale</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:toYScale</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pivotX</span>=<span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pivotY</span>=<span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">&quot;1000&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scale</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Rotate举例</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">rotate</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fromDegrees</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:toDegrees</span>=<span class="string">&quot;360&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pivotX</span>=<span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pivotY</span>=<span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">&quot;500&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rotate</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Translate</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">translate</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fromXDelta</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fromYDelta</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:toXDelta</span>=<span class="string">&quot;100&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:toYDelta</span>=<span class="string">&quot;100&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">&quot;200&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">translate</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>动画集合 AnimationSet</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:interpolator</span>=<span class="string">&quot;@android:anim/accelerate_decelerate_interpolator&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillAfter</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">&quot;200&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scale</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">&quot;3000&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromXScale</span>=<span class="string">&quot;0.0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromYScale</span>=<span class="string">&quot;0.0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotX</span>=<span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotY</span>=<span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toXScale</span>=<span class="string">&quot;1.0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toYScale</span>=<span class="string">&quot;1.0&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alpha</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">&quot;3000&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromAlpha</span>=<span class="string">&quot;1.0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toAlpha</span>=<span class="string">&quot;0.5&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rotate</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromDegrees</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toDegrees</span>=<span class="string">&quot;720&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotX</span> = <span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:pivotY</span>=<span class="string">&quot;50%&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span> = <span class="string">&quot;3000&quot;</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">translate</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromXDelta</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toXDelta</span>=<span class="string">&quot;100&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:fromYDelta</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:toYDelta</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>加载动画资源</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scaleAnim = AnimationUtils.loadAnimation(<span class="keyword">this</span>, R.anim.anim_rotate) <span class="comment">// 装载动画</span></span><br><span class="line">scaleAnim.interpolator = LinearInterpolator() <span class="comment">// 插值器</span></span><br><span class="line">scaleAnim.repeatCount = <span class="number">2</span>	<span class="comment">// 重复次数</span></span><br><span class="line">scaleAnim.repeatMode = Animation.RESTART	<span class="comment">// 重复模式</span></span><br><span class="line">fireAnim.startAnimation(scaleAnim)	<span class="comment">// 开启动画</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="代码创建动画"><a href="#代码创建动画" class="headerlink" title="代码创建动画"></a>代码创建动画</h2><p>示例</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> tranAnim = TranslateAnimation(<span class="number">0f</span>, <span class="number">200f</span>,<span class="number">0f</span>,<span class="number">0f</span>)</span><br><span class="line">        <span class="keyword">val</span> rotateAnim = RotateAnimation(<span class="number">0f</span>, -<span class="number">45f</span>,<span class="number">0.5f</span>,<span class="number">0.5f</span>)</span><br><span class="line">        <span class="keyword">val</span> animatorSet = AnimationSet(<span class="literal">true</span>)</span><br><span class="line">        animatorSet.addAnimation(tranAnim)</span><br><span class="line">        animatorSet.addAnimation(rotateAnim)</span><br><span class="line">        animatorSet.interpolator = LinearInterpolator()</span><br><span class="line">        animatorSet.duration = <span class="number">200</span></span><br><span class="line">        animatorSet.repeatCount = Animation.INFINITE</span><br><span class="line">        animatorSet.repeatMode = Animation.REVERSE</span><br><span class="line">        animatorSet.fillAfter = <span class="literal">true</span></span><br><span class="line">        loadingAnim.startAnimation(animatorSet)</span><br></pre></td></tr></table></figure>
+
+<h1 id="属性动画（-PropertyAnimator）"><a href="#属性动画（-PropertyAnimator）" class="headerlink" title="属性动画（ PropertyAnimator）"></a>属性动画（ <em>PropertyAnimator</em>）</h1><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/guide/topics/graphics/prop-animation?hl=zh_cn">属性动画概览  | Android 开发者  | Android Developers (google.cn)</a></p>
+<h2 id="Animator"><a href="#Animator" class="headerlink" title="Animator"></a>Animator</h2><ul>
+<li><p>AnimatorSet</p>
+</li>
+<li><p>ValueAnimator</p>
+</li>
+<li><p>ObjectAnimator</p>
+</li>
+<li><p>TimeAnimator</p>
+</li>
+</ul>
+<h2 id="动画属性（动画属性必须有set和get⽅法）"><a href="#动画属性（动画属性必须有set和get⽅法）" class="headerlink" title="动画属性（动画属性必须有set和get⽅法）"></a>动画属性（动画属性必须有set和get⽅法）</h2><p>示例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> transAnimator = ObjectAnimator.ofFloat(</span><br><span class="line">            fireAnim,<span class="string">&quot;translationX&quot;</span>,<span class="number">0f</span>,fireAnim.width*<span class="number">2f</span></span><br><span class="line">        )</span><br><span class="line">        transAnimator.duration = <span class="number">500</span></span><br><span class="line">        transAnimator.interpolator = BounceInterpolator()</span><br><span class="line">        transAnimator.addUpdateListener &#123;  &#125;</span><br><span class="line">        transAnimator.addPauseListener&#123;&#125;</span><br><span class="line">        transAnimator.addListener(</span><br><span class="line">            onCancel = &#123;&#125;,</span><br><span class="line">            onStart = &#123;&#125;,</span><br><span class="line">            onEnd = &#123;&#125;,</span><br><span class="line">            onRepeat = &#123;&#125;</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
+<li>帧动画可用来制作动态图片</li>
+<li>补间动画可以制作控件变化效果，但并不会改变控件本身，不具有交互性，但使用方便</li>
+<li>属性动画实现动画的同时，不会丢失控件原本的事件</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://eminent-yaoyilin.com">Ezralin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://eminent-yaoyilin.com/2022/07/26/Android%E5%8A%A8%E7%94%BB/">https://eminent-yaoyilin.com/2022/07/26/Android%E5%8A%A8%E7%94%BB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android</a></div><div class="post_share"><div class="social-share" data-image="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072602.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/25/Android-SealedClass/"><img class="next-cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072502.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Android SealedClass</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/07/15/Android-DataBinding%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/" title="Android DataBinding进阶使用"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071303.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-15</div><div class="title">Android DataBinding进阶使用</div></div></a></div><div><a href="/2022/07/25/Android-SealedClass/" title="Android SealedClass"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072502.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-25</div><div class="title">Android SealedClass</div></div></a></div><div><a href="/2022/07/13/Android%E4%B9%8B%E8%87%AA%E4%BF%A1demo/" title="Android之自信demo"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022062306.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-13</div><div class="title">Android之自信demo</div></div></a></div><div><a href="/2022/07/17/Android%E5%88%9B%E5%BB%BA%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" title="Android创建控件的三种方法"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20cover_img08.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-17</div><div class="title">Android创建控件的三种方法</div></div></a></div><div><a href="/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/" title="Android触摸事件"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071901.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-19</div><div class="title">Android触摸事件</div></div></a></div><div><a href="/2022/07/14/Android%E7%BB%91%E5%AE%9A%E4%B8%8E%E7%9B%91%E5%90%AC/" title="Android绑定与监听"><img class="cover" src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071304.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-14</div><div class="title">Android绑定与监听</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20aboutPage.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ezralin</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/destroyerngu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/destroyerngu" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2529687390@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">幡然醒悟,为时未晚,当毅然前行,不负此生</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-animation"><span class="toc-number">1.</span> <span class="toc-text">Android animation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%A7%E5%8A%A8%E7%94%BB-FrameAnimation"><span class="toc-number">3.</span> <span class="toc-text">帧动画( FrameAnimation)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-number">3.0.1.</span> <span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E5%8A%A8%E7%94%BB"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">开启动画</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#View%E5%8A%A8%E7%94%BB%EF%BC%88%E8%A1%A5%E9%97%B4%E5%8A%A8%E7%94%BB%EF%BC%89-TweenAnimation"><span class="toc-number">4.</span> <span class="toc-text">View动画（补间动画）(TweenAnimation)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E9%97%B4%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7"><span class="toc-number">4.1.</span> <span class="toc-text">补间动画属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E9%97%B4%E5%8A%A8%E7%94%BB%E5%B8%B8%E7%94%A8"><span class="toc-number">4.2.</span> <span class="toc-text">补间动画常用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">如何使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%9B%E5%BB%BA%E5%8A%A8%E7%94%BB"><span class="toc-number">4.3.</span> <span class="toc-text">代码创建动画</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%EF%BC%88-PropertyAnimator%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">属性动画（ PropertyAnimator）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Animator"><span class="toc-number">5.1.</span> <span class="toc-text">Animator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7%EF%BC%88%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7%E5%BF%85%E9%A1%BB%E6%9C%89set%E5%92%8Cget%E2%BD%85%E6%B3%95%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">动画属性（动画属性必须有set和get⽅法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">5.3.</span> <span class="toc-text">区别</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/26/Android%E5%8A%A8%E7%94%BB/" title="Android动画"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072602.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android动画"/></a><div class="content"><a class="title" href="/2022/07/26/Android%E5%8A%A8%E7%94%BB/" title="Android动画">Android动画</a><time datetime="2022-07-26T13:52:21.000Z" title="Created 2022-07-26 21:52:21">2022-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/25/Android-SealedClass/" title="Android SealedClass"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072502.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android SealedClass"/></a><div class="content"><a class="title" href="/2022/07/25/Android-SealedClass/" title="Android SealedClass">Android SealedClass</a><time datetime="2022-07-25T07:50:50.000Z" title="Created 2022-07-25 15:50:50">2022-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/21/Android%E6%B6%88%E6%B6%88%E4%B9%90/" title="Android消消乐"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022072102.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android消消乐"/></a><div class="content"><a class="title" href="/2022/07/21/Android%E6%B6%88%E6%B6%88%E4%B9%90/" title="Android消消乐">Android消消乐</a><time datetime="2022-07-21T04:33:19.000Z" title="Created 2022-07-21 12:33:19">2022-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/" title="Android触摸事件"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20img2022071901.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android触摸事件"/></a><div class="content"><a class="title" href="/2022/07/19/Android%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/" title="Android触摸事件">Android触摸事件</a><time datetime="2022-07-19T14:12:29.000Z" title="Created 2022-07-19 22:12:29">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/17/Android%E5%88%9B%E5%BB%BA%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" title="Android创建控件的三种方法"><img src="https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20cover_img08.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android创建控件的三种方法"/></a><div class="content"><a class="title" href="/2022/07/17/Android%E5%88%9B%E5%BB%BA%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/" title="Android创建控件的三种方法">Android创建控件的三种方法</a><time datetime="2022-07-17T13:19:25.000Z" title="Created 2022-07-17 21:19:25">2022-07-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://ezralinblogpicture-1311676448.cos.ap-chongqing.myqcloud.com/blogPicture/%20adjust03.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By Ezralin</div><div class="footer_custom_text">I <a href="https://eminent-yaoyilin.com/">love</a> you</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
