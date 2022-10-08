@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Unity开始</title>
+      <link href="/2022/10/08/Unity%E5%BC%80%E5%A7%8B/"/>
+      <url>/2022/10/08/Unity%E5%BC%80%E5%A7%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Unity入门"><a href="#Unity入门" class="headerlink" title="Unity入门"></a>Unity入门</h1><hr><h1 id="Unity介绍"><a href="#Unity介绍" class="headerlink" title="Unity介绍"></a>Unity介绍</h1><h2 id="Unity的诞生"><a href="#Unity的诞生" class="headerlink" title="Unity的诞生"></a>Unity的诞生</h2><blockquote><p><a href="https://www.jianshu.com/p/55021d9301ab">https://www.jianshu.com/p/55021d9301ab</a></p></blockquote><h2 id="Unity干了什么"><a href="#Unity干了什么" class="headerlink" title="Unity干了什么"></a>Unity干了什么</h2><blockquote><p><a href="https://baike.baidu.com/item/Unity/10793?fr=aladdin">https://baike.baidu.com/item/Unity/10793?fr=aladdin</a></p></blockquote><h2 id="Unity发展"><a href="#Unity发展" class="headerlink" title="Unity发展"></a>Unity发展</h2><blockquote><p><a href="https://baike.baidu.com/item/Unity/10793?fr=aladdin#3">https://baike.baidu.com/item/Unity/10793?fr=aladdin#3</a></p></blockquote><h2 id="Unity职业发展和薪资待遇"><a href="#Unity职业发展和薪资待遇" class="headerlink" title="Unity职业发展和薪资待遇"></a>Unity职业发展和薪资待遇</h2><blockquote><p>找工作渠道</p><p>拉勾 Boss直聘 脉脉 校园招聘 技术社区（论坛、QQ群）</p></blockquote><h2 id="Unity独立游戏"><a href="#Unity独立游戏" class="headerlink" title="Unity独立游戏"></a>Unity独立游戏</h2><blockquote><p>关于独立游戏的定义</p><p>1、小团队开发的游戏</p><p>2、不为了赚钱的而开发的非商业游戏</p><p>3、有个人情怀和故事的游戏</p></blockquote><hr><h1 id="Unity下载和安装"><a href="#Unity下载和安装" class="headerlink" title="Unity下载和安装"></a>Unity下载和安装</h1><h2 id="Unity下载地址"><a href="#Unity下载地址" class="headerlink" title="Unity下载地址"></a>Unity下载地址</h2><blockquote><p>Unity中国官网 unity.cn</p><p>国际官网unity.com</p><p>官网：<a href="http://www.unity.com/">www.unity.com</a></p><p>GetStarted或者网页底部的Get Unity</p><p>个人版和收费版</p></blockquote><h2 id="关于网络"><a href="#关于网络" class="headerlink" title="关于网络"></a>关于网络</h2><blockquote><p>国际官网速度你懂的，但可以<strong>科学上网</strong></p></blockquote><hr><h1 id="Unity五个窗口面板（视图、窗口）"><a href="#Unity五个窗口面板（视图、窗口）" class="headerlink" title="Unity五个窗口面板（视图、窗口）"></a>Unity五个窗口面板（视图、窗口）</h1><p><strong>Project</strong>：工程面板，存放工程的各种资源。包括：声音资源、模型资源、场景文件、材质、脚本等。</p><p><strong>Hierarchy</strong>：层级面板，展示当前打开的场景里面有哪些东西。（里面的东西称为游戏物体）</p><p><strong>Inspector</strong>：检视面板（或属性面板），查看一个游戏物体由哪些组件组成。</p><blockquote><p>场景 -&gt; 多个游戏物体 -&gt; 多个组件</p></blockquote><p><strong>Scene</strong>：场景面板，显示当前场景的样子</p><blockquote><p>鼠标中键：平移视角</p><p>鼠标右键：旋转视角（环顾四周），围绕自身旋转</p><p>Alt+鼠标左键：渲染视角，围绕当前视角前方位置</p></blockquote><p><strong>Game</strong>：游戏面板，场景运行的时候的样子</p><h3 id="场景、游戏物体、组件"><a href="#场景、游戏物体、组件" class="headerlink" title="场景、游戏物体、组件"></a>场景、游戏物体、组件</h3><p>对应的英文：<strong>Scene</strong>，<strong>GameObject</strong>，<strong>Component</strong>。</p><p>场景的简单编辑操作：创建、复制、删除。</p><h3 id="Unity中的基本模型和场景操作"><a href="#Unity中的基本模型和场景操作" class="headerlink" title="Unity中的基本模型和场景操作"></a>Unity中的基本模型和场景操作</h3><p>1、如何创建基本模型和如何导入复杂模型</p><p>2、场景基本操作</p><blockquote><p>聚焦：双击游戏物体 或者 F</p><p>放大缩小视野：鼠标滚轮</p><p>围绕物体旋转：Alt+鼠标左键</p><p>使用MoveTool下 移动物体</p></blockquote><p>3、<strong>视野分类</strong></p><blockquote><p><strong>Persp</strong> 透视视野    <strong>ISO</strong>平行视野</p><p>在不同视野下：关于鼠标右键的不同</p></blockquote><p>4、<strong>保存</strong>（场景保存、代码保存）</p><blockquote><p>Ctrl + S</p></blockquote><h3 id="世界坐标系和局部坐标系"><a href="#世界坐标系和局部坐标系" class="headerlink" title="世界坐标系和局部坐标系"></a>世界坐标系和局部坐标系</h3><p><strong>坐标系</strong>：x 左右 y 上下 z前后</p><p><strong>局部坐标系</strong>：父物体和子物体</p><p><strong>单位：</strong>Unity里面的坐标是以米为单位的</p><h3 id="工具栏"><a href="#工具栏" class="headerlink" title="工具栏"></a>工具栏</h3><p><strong>四个工具</strong>:Q W E R</p><p><strong>Q：</strong>视图工具（使用鼠标中键可以临时切换到这个恐惧）</p><p><strong>W：</strong>移动工具</p><p><strong>E：</strong>旋转工具</p><p><strong>R：</strong>缩放工具</p><p><strong>其他工具</strong></p><blockquote><p>Rect Tool     Transform Tool      Collider Tool</p></blockquote><p><strong>切换工具</strong></p><blockquote><p>位置工具：Pivot原点 - Center中心</p><p>局部和全局坐标切换：Local - Global</p></blockquote><p><strong>步移工具</strong></p><blockquote><p>按钮</p><p>快捷键：Ctrl</p><p>条件：世界坐标系下</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Unity游戏开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Unity </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>二叉树之最大深度</title>
       <link href="/2022/10/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8B%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/"/>
       <url>/2022/10/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8B%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</url>
