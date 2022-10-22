@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>快速传递</title>
+      <link href="/2022/10/22/%E5%BF%AB%E9%80%9F%E4%BC%A0%E9%80%92/"/>
+      <url>/2022/10/22/%E5%BF%AB%E9%80%9F%E4%BC%A0%E9%80%92/</url>
+      
+        <content type="html"><![CDATA[<h1 id="快速传递"><a href="#快速传递" class="headerlink" title="快速传递"></a>快速传递</h1><hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ol><li>文件传输作为日常生活、工作中需求量较高的一项功能，工作中总会遇到需要将文件从一个设备转移到另一个设备上查看、存储，或者将资料回传的情况。一般大小的文件可以用QQ或者微信的文件传输助手来解决，或者任意一个邮箱也是可以实现的，但如果文件大小过大，传输就有一定问题。</li><li>此篇博客旨在提供<strong>有效途径</strong>去解决上述问题</li><li>强烈推荐直接打开手机<strong>开发者模式</strong>，数据线连接切换到<strong>管理文件</strong>，此时可以使用复制粘贴操作完成（针对手机与电脑传递大文件）</li></ol><hr><h1 id="使用中介软件"><a href="#使用中介软件" class="headerlink" title="使用中介软件"></a>使用中介软件</h1><hr><h1 id="QQ-x2F-微信助手-x2F-邮箱"><a href="#QQ-x2F-微信助手-x2F-邮箱" class="headerlink" title="QQ&#x2F;微信助手&#x2F;邮箱"></a>QQ&#x2F;微信助手&#x2F;邮箱</h1><ol><li>目前有QQ、微信、邮箱。这些主要是手机端与<a href="https://www.zhihu.com/search?q=%E7%BD%91%E9%A1%B5%E7%89%88&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:2373926391%7D">网页版</a>之间传输文件，前提是登陆的账号是同一个，传输文件大小限制在2G以下。</li><li>对于上述超过1G的大文件，文件传输速度会变得非常缓慢，更适合1G以下的文件传输，主要是方便。</li><li>由于QQ&#x2F;微信本身的私密性，这种大文件传输方法并不适用于大范围的传输，传播人数受限，因此更适合个人使用，而且邮件发送超过2G也发不出去。所以QQ不能作为大文件传输软件的一种常用渠道使用。</li></ol><hr><h1 id="FileZilla"><a href="#FileZilla" class="headerlink" title="FileZilla"></a>FileZilla</h1><ol><li><p>这是个免费使用的ftp传输<a href="https://www.zhihu.com/search?q=%E5%AE%A2%E6%88%B7%E7%AB%AF&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:2373926391%7D">客户端</a>，主要适用于windows系统，mac并不适用。</p></li><li><p>主要原理其实就是传统的ftp局域网传输，只不过与之前需要自己搭建服务器相比，FileZilla提供的客户端要简便许多。操作也很简单，基本上看一遍就能会。</p></li><li><p>比较好的一点是，FileZilla可以实现多个文件的同时收发，速度就要看你所在的网络环境来决定了。</p></li><li><p>有一点不好的是，FileZilla后期的更新与维护还是需要专人来弄，这个也是所有<a href="https://www.zhihu.com/search?q=FTP%E8%BD%AF%E4%BB%B6&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:2373926391%7D">FTP软件</a>的共同点了。当然FTP在使用上也会受到地域的限制，无法做到实时传输，只能在指定的机器上完成这一项操作。</p></li><li><p>各类中介软件需要你在电脑安装或者手机上安装相应软件才可以使用，速度一般，有中介，费事</p></li><li><p>如果你是在<strong>电脑</strong>上为手机<strong>备份数据</strong>，那么强烈建议在电脑上安装使用手机软件自带的驱动，这样便于管理。</p><ul><li>这种软件的下载一般用数据线将手机与电脑连接起来即可</li></ul></li></ol><hr><h1 id="云盘or网盘"><a href="#云盘or网盘" class="headerlink" title="云盘or网盘"></a>云盘or网盘</h1><ol><li>用云盘来作为大文件传输软的好处就是可以实现多个终端文件的互通。大文件秒传做的比较出彩的应该算是百度网盘了，仅限于开了超级会员的，免费版的速度还是一言难尽，上传的速度比较慢。</li><li>其次，企业网盘中的<a href="https://www.zhihu.com/search?q=%E9%95%AD%E9%80%9F%E4%BA%91%E4%BC%A0%E6%96%87%E4%BB%B6&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:2373926391%7D">镭速云传文件</a>传输做的也很到位，因为拥有网页端使用传输，所以能够实现多个终端的数据互通，更加适合团队或者公司使用。</li><li>另外，跨国传输也是镭速云传主打的一项功能，得益于镭速云传在全球建立的大量数据中心，跨国传输做的还是可以的。</li></ol><hr><h1 id="镭速软件"><a href="#镭速软件" class="headerlink" title="镭速软件"></a><a href="https://www.zhihu.com/search?q=%E9%95%AD%E9%80%9F%E8%BD%AF%E4%BB%B6&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:2373926391%7D">镭速软件</a></h1><ol><li>镭速软件提供传输服务器、高速传输引擎、超大文件传输、跨国文件传输、云数据高速传输等服务，在国内很受欢迎。</li><li>随着行业内非结构数据爆炸式增长，海量数字信息在全球范围内快速且可靠地传输已逐渐成为业务成功的关键，所涉及的行业形形色色，包括数字媒体的创建、管理及娱乐内容 传递以及用于科研的基因组序列数据。</li><li>镭速创新型UDP优化传输技术，消除了基于 TCP 的传统文件传输技术（如 FTP 和 HTTP）的缺陷，传输速度比 FTP&#x2F;HTTP 快数百倍，且不受限于文件大小、传输距离或网络条件，支持包括通过卫星、无线以及固有远距离且不可靠的<a href="https://www.zhihu.com/search?q=%E6%B4%B2%E9%99%85%E9%93%BE%E8%B7%AF&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:2373926391%7D">洲际链路</a>进行的传输。</li></ol><hr><h1 id="移动端开发者模式传输"><a href="#移动端开发者模式传输" class="headerlink" title="移动端开发者模式传输"></a>移动端开发者模式传输</h1><ol><li><strong>仅限</strong>自己的移动端与电脑之间传输大文件</li><li>将手机与电脑用数据线连接</li><li>手机打开开发者模式，并将数据线连接调为管理文件</li><li>此时，你就可以<strong>直接操作手机上的所有文件</strong>，传输大文件只是复制粘贴的问题，<strong>速度最快</strong></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 心语 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>二叉搜索树中的众数</title>
       <link href="/2022/10/22/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0/"/>
       <url>/2022/10/22/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0/</url>
