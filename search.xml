@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>二叉树的最近公共祖先</title>
+      <link href="/2022/10/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
+      <url>/2022/10/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</url>
+      
+        <content type="html"><![CDATA[<h1 id="二叉树的最近公共祖先"><a href="#二叉树的最近公共祖先" class="headerlink" title="二叉树的最近公共祖先"></a>二叉树的最近公共祖先</h1><hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ol><li><p>最近公共祖先的<strong>定义</strong></p><blockquote><p>对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）</p></blockquote></li></ol><hr><h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p><p>例如，给定如下二叉树: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4]</p><p><img src="https://img-blog.csdnimg.cn/20201016173414722.png" alt="236. 二叉树的最近公共祖先"></p><p>示例 1: 输入: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 1 输出: 3 解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</p><p>示例 2: 输入: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 4 输出: 5 解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</p><p><strong>说明</strong>:</p><ul><li>所有节点的值都是唯一的。</li><li>p、q 为不同节点且均存在于给定的二叉树中。</li></ul><p><strong>提示</strong>：</p><ul><li>树中节点数目在范围 [2, 10的5次幂] 内</li><li>-10的9次幂&lt;&#x3D; Node.val &lt;&#x3D; 10的9次幂</li><li>所有 Node.val 互不相同 </li><li>p !&#x3D; q</li><li>p 和 q 均存在于给定的二叉树中</li></ul><hr><h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先 - 力扣（LeetCode）</a></p><hr><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h2><ol><li>利用回溯，从下往上查找二叉树</li><li>由于是找公共祖先，需要处理中间节点，我们可以通过后序遍历（左右中）（天然的回溯过程），根据左右子树的返回值，来处理中节点的逻辑</li><li>判断一个节点是节点q和节点p的最近公共祖先<ul><li>如果找到一个节点，发现左子树出现结点p，右子树出现节点q，或者 左子树出现结点q，右子树出现节点p，那么该节点就是节点p和q的最近公共祖先</li><li><strong>节点本身p(q)，它拥有一个子孙节点q(p)</strong></li></ul></li></ol><hr><h1 id="最终代码"><a href="#最终代码" class="headerlink" title="最终代码"></a>最终代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == q || root == p || root == <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line">        TreeNode* left = <span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">        TreeNode* right = <span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line">        <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="literal">NULL</span> &amp;&amp; right != <span class="literal">NULL</span>) <span class="keyword">return</span> right;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (left != <span class="literal">NULL</span> &amp;&amp; right == <span class="literal">NULL</span>) <span class="keyword">return</span> left;</span><br><span class="line">        <span class="keyword">else</span>  &#123; </span><br><span class="line">            <span class="comment">//  (left == NULL &amp;&amp; right == NULL)</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>快速传递</title>
       <link href="/2022/10/22/%E5%BF%AB%E9%80%9F%E4%BC%A0%E9%80%92/"/>
       <url>/2022/10/22/%E5%BF%AB%E9%80%9F%E4%BC%A0%E9%80%92/</url>
